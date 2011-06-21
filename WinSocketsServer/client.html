@@ -1,0 +1,47 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>websocket client</title>
+    <script src="jquery-1.5.1.min.js"></script>
+    <script type="text/javascript">
+        var ws;
+
+        function openConnection() {
+
+            ws = new WebSocket('ws://127.0.0.1:38950/echo');
+
+            ws.onmessage = function (evt) {
+                $("#textblock").append(evt.data);
+            };
+
+            ws.onopen = function () {
+                $("#status").append('websocket connected.<br/>');
+                ws.send('client websocket connection is open.');
+            };
+           
+            ws.onclose = function () {
+                $("#status").append('connection closed.</br>');
+            }
+
+        }
+
+        $(document).ready(function () {
+            openConnection();
+            $("#textbox").change(function () {
+                ws.send($('#textbox').val());
+            });
+        });
+    </script>
+</head>
+<body>
+    <div style="font-family: Consolas; font-size: 11;" >
+    <p>
+            Enter text to send to websocket server (TAB or ENTER):</p>
+        <input id='textbox' type='text' value='' />
+    <p id='status'>
+    </p>
+    <p id='textblock'>
+    </p>        
+    </div>
+</body>
+</html>
