@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WinSockServer", "WinSocketsServer\WinSockets.vcxproj", "{10904EE6-116A-4CAE-A58D-BF6EE21F2409}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WinSocketsClient", "WinSocketsClient\WinSocketsClient.vcxproj", "{9659DFC7-4BA8-44B0-843C-707139D9D1B3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WebSocketsServer", "WebSocketsServer\WebSocketsServer.vcxproj", "{DFBC0EB8-F952-4AC0-B675-704801B487C5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "md5", "md5", "{8D82745D-F9AC-4B4C-816E-35AF925B05D5}"
+	ProjectSection(SolutionItems) = preProject
+		WebSocketsServer\md5\md5 test.cpp = WebSocketsServer\md5\md5 test.cpp
+		WebSocketsServer\md5\md5.cpp = WebSocketsServer\md5\md5.cpp
+		WebSocketsServer\md5\md5.h = WebSocketsServer\md5\md5.h
+		WebSocketsServer\md5\md5_loc.h = WebSocketsServer\md5\md5_loc.h
+		WebSocketsServer\md5\md5_t.c = WebSocketsServer\md5\md5_t.c
+		WebSocketsServer\md5\Md5Example.cpp = WebSocketsServer\md5\Md5Example.cpp
+		WebSocketsServer\md5\Md5Hash.cpp = WebSocketsServer\md5\Md5Hash.cpp
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "websockets", "websockets", "{3824A812-CFFB-4E80-A429-B71A655B3CD9}"
+	ProjectSection(SolutionItems) = preProject
+		WebSocketsServer\RegexTR1example.cpp = WebSocketsServer\RegexTR1example.cpp
+		WebSocketsServer\run websocketserver.cpp = WebSocketsServer\run websocketserver.cpp
+		WebSocketsServer\webSocketServer.h = WebSocketsServer\webSocketServer.h
+		WebSocketsServer\WebSocketsHandshake.cpp = WebSocketsServer\WebSocketsHandshake.cpp
+		WebSocketsServer\WebSocketsServer.cpp = WebSocketsServer\WebSocketsServer.cpp
+		WebSocketsServer\WebSocketsServer2.cpp = WebSocketsServer\WebSocketsServer2.cpp
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "C++HttpRequest", "WindowsHttp\WindowsHttp.vcxproj", "{95A6A78C-C508-4E70-AF6B-F61D2DBBFE1B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "http", "http", "{FA88B2E1-BC83-4DF0-8CAA-B2F75E7280E1}"
+	ProjectSection(SolutionItems) = preProject
+		..\ProjectWinSock\connect by host DNS name.c = ..\ProjectWinSock\connect by host DNS name.c
+		..\ProjectWinSock\gethostbyaddr-abbrev.c = ..\ProjectWinSock\gethostbyaddr-abbrev.c
+		..\ProjectWinSock\getHostByName.c = ..\ProjectWinSock\getHostByName.c
+		WindowsHttp\WinHttpDemo.cpp = WindowsHttp\WinHttpDemo.cpp
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{10904EE6-116A-4CAE-A58D-BF6EE21F2409}.Debug|Win32.ActiveCfg = Debug|Win32
+		{10904EE6-116A-4CAE-A58D-BF6EE21F2409}.Debug|Win32.Build.0 = Debug|Win32
+		{10904EE6-116A-4CAE-A58D-BF6EE21F2409}.Release|Win32.ActiveCfg = Release|Win32
+		{10904EE6-116A-4CAE-A58D-BF6EE21F2409}.Release|Win32.Build.0 = Release|Win32
+		{9659DFC7-4BA8-44B0-843C-707139D9D1B3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9659DFC7-4BA8-44B0-843C-707139D9D1B3}.Debug|Win32.Build.0 = Debug|Win32
+		{9659DFC7-4BA8-44B0-843C-707139D9D1B3}.Release|Win32.ActiveCfg = Release|Win32
+		{9659DFC7-4BA8-44B0-843C-707139D9D1B3}.Release|Win32.Build.0 = Release|Win32
+		{DFBC0EB8-F952-4AC0-B675-704801B487C5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DFBC0EB8-F952-4AC0-B675-704801B487C5}.Debug|Win32.Build.0 = Debug|Win32
+		{DFBC0EB8-F952-4AC0-B675-704801B487C5}.Release|Win32.ActiveCfg = Release|Win32
+		{DFBC0EB8-F952-4AC0-B675-704801B487C5}.Release|Win32.Build.0 = Release|Win32
+		{95A6A78C-C508-4E70-AF6B-F61D2DBBFE1B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{95A6A78C-C508-4E70-AF6B-F61D2DBBFE1B}.Debug|Win32.Build.0 = Debug|Win32
+		{95A6A78C-C508-4E70-AF6B-F61D2DBBFE1B}.Release|Win32.ActiveCfg = Release|Win32
+		{95A6A78C-C508-4E70-AF6B-F61D2DBBFE1B}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
