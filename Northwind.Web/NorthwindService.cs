@@ -125,5 +125,16 @@ namespace Northwind
 			}
 		}
 
+
+		#region INorthwindService Members
+
+
+		public string PostString(string s)
+		{
+			Supplier supplier = new Supplier { ContactName = "supplier", Name = "new supplier", ID = 3333, Products = new List<Product> { new Product { ID = 444, Name = "gold" } } };
+			return supplier.JSON_stringify();
+		}
+
+		#endregion
 	}
 }
