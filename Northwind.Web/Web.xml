@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration xmlns="http://schemas.microsoft.com/.NetConfiguration/v2.0">
+  <system.web>
+    <!--<authorization>
+			<allow roles="SystemAdmin" />
+			<deny users="*" />
+		</authorization>-->
+  </system.web>
+  <system.serviceModel>
+    <bindings>
+      <webHttpBinding>
+        <binding name="certRequired" maxReceivedMessageSize="2147483647">
+          <readerQuotas maxArrayLength="2147483647" maxStringContentLength="2147483647" />
+          <security mode="Transport">
+            <transport clientCredentialType="Certificate" />
+          </security>
+        </binding>
+        <binding name="noCredential" maxReceivedMessageSize="2147483647">
+          <readerQuotas maxArrayLength="2147483647" maxStringContentLength="2147483647" />
+          <security mode="Transport">
+            <transport clientCredentialType="None" />
+          </security>
+        </binding>
+      </webHttpBinding>
+    </bindings>
+    <behaviors>
+      <endpointBehaviors>
+        <behavior name="webBehavior">
+          <webHttp/>
+        </behavior>
+      </endpointBehaviors>
+    </behaviors>
+    <services>
+      <service name="DAMIRSite.Silverlight.PortfolioViewService">
+        <endpoint address="" behaviorConfiguration="webBehavior"
+                  binding="webHttpBinding" bindingConfiguration="certRequired"
+                  contract="DAMIRSite.Silverlight.PortfolioViewService"/>
+        <!--<endpoint address="" behaviorConfiguration="webBehavior"
+                  binding="webHttpBinding" bindingConfiguration=""
+                  contract="DAMIRSite.Silverlight.PortfolioViewService"/>-->
+      </service>
+    </services>
+  </system.serviceModel>
+
+</configuration>
