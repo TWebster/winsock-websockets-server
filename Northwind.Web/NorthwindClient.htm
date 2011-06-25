@@ -1,0 +1,169 @@
+﻿<!DOCTYPE HTML >
+<html>
+<head>
+    <title>DAMIR</title>
+    <link href="js/jqplot/jquery.jqplot.css" rel="stylesheet" type="text/css" />
+    <script src="js/jqplot/jquery.js" type="text/javascript"></script>
+    <!--<script src="js/jqplot/jquery.jqplot.js" type="text/javascript"></script>-->
+    <!--<script src="js/jqplot/jqplot.barRenderer.js" type="text/javascript"></script>-->
+    <!--<script src="js/jqplot/jqplot.pieRenderer.js" type="text/javascript"></script>-->
+    <!--<script src="js/jqplot/jqplot.categoryAxisRenderer.js" type="text/javascript"></script>-->
+    <!--<script src="js/jqplot/jqplot.highlighter.js" type="text/javascript"></script>-->
+    <!--<script src="js/jqplot/jqplot.pointLabels.js" type="text/javascript"></script>-->
+    <script class="code" type="text/javascript">
+
+
+        $(document).ready(function () {
+            $("#btn1").click(function (e) {
+                SupplierRequests(e);
+            });
+            $("#btn2").click(function (e) {
+                SuppliersRequest(e);
+            });
+
+        });
+
+        var baseUrl = "http://localhost:60107/NorthwindService.svc";
+
+        function SupplierRequests(e) {
+    
+            var params = {
+                city: $("#city").val(),
+                co: $("#co").val(),
+                id: $("#id").val()
+            };
+
+
+            $.ajax({
+                type: "GET",
+                url: baseUrl + "/supplier/get?",
+                data: params,
+                dataType: "json",
+                success: function (response) {
+                    if (typeof response != "undefined") {
+                        var obj = tryParseJSON(response);
+                        if (typeof obj == "object") {
+                            $("#out").append("Succesfully got JSON as string from service.<br/>");
+                            //make another request. Now post the JSON as a JSON object to the service:
+                            var json = JSON.stringify(obj);
+                            $.ajax({
+                                type: "GET",
+                                url: baseUrl + "/supplier/bad/get?",
+                                data: { json: json },
+                                success: function (response) {
+                                    if (typeof response == "object") {
+                                        $("#out").append("Successfully got JSON object from WCF service. Now attempt HTTP POST the JSON object. (View network requests for result.)<br/>");
+                                    }
+
+                                }
+                            });
+                            postSupplier(obj, json);                            
+                        }
+                    }
+
+
+                }
+            });
+
+        }
+
+        function postSupplier(obj, json) {
+
+            $.ajax({
+                type: "GET",
+                statusCode: { 400: $("#out").append("Bad Request (400). WCF service failed on HTTP GET.<br/>")
+                },
+                url: baseUrl + "/supplier/post",
+                data: { json: json },
+                success: function (response) {
+                    if (typeof response == "object")
+                        $("#out").append("Successfully got same JSON object from WCF service after HTTP GET (used for HTTP POST).<br/>");
+                }
+            });
+        //POST as JSON object (WebInvoke)            
+            $.ajax({
+                type: "POST",
+                statusCode: { 400: $("#out").append("Bad Request (400). WCF service failed on HTTP POST.<br/>")
+                },
+                url: baseUrl + "/supplier/bad/post",
+                data: { s: obj },
+                success: function (response) {
+                    if (typeof response == "object")
+                        $("#out").append("Successfully got same JSON object from WCF service after HTTP POST.<br/>");
+                }
+            });
+
+        }
+
+        function SuppliersRequest(e) {
+            var params = {
+                url: $("#url").val(),
+                postal: $("#co").val()
+            };
+
+            $.ajax({
+                type: "GET",
+                url: baseUrl+ "/suppliers/get?",
+                data: params,
+                dataType: "json",
+                success: function (response) {
+                    if (typeof response == "string") {
+                        var array = JSON.parse(response);
+                        $("#out").append("Got JSON string of " + array.length + " Suppliers from WCF service.<br/>");
+                        for (var i = 0; i < array.length; i++) {
+                            $("#out").append(array[i].Name + "<br/>");
+                        }                        
+                         
+                    }
+                }
+            });
+        }
+
+        //object if parses, (bool)false if fails to parse.
+        function tryParseJSON(json) {
+            try {
+                var result = eval("(" + json + ")");
+                if (typeof result == "object")
+                    return result;
+            }
+            catch (e) {
+            }
+            return json;
+        } 
+    </script>
+</head>
+<body>
+    <div style="font-family: verdana; font-size: 9.5px;">
+    
+<aside>
+This demonstrates send/receive-ing JSON between jQuery/javascript and a WCF Web HTTP (REST) service.
+</aside>
+    
+        <div>
+            <h3>
+                1 Supplier</h3>
+            <form action="/" method="post">
+            ID:<input type="number" id="id" min="1" max="10" />
+            City:<input type="text" id="city" />
+            Country:<input type="text" id="co" name="co" placeholder="UK" /><br />
+            <!--Date:<input type="date" name="user_date" />-->
+            <button id="btn1" type="button" autofocus="autofocus">
+                SEND</button>
+            </form>
+            <br />
+            <h3>
+                array of Suppliers</h3>
+            <form action="/" method="post">
+            <div>
+                URL:
+                <input id="url" type="url" />
+                Postal:<input id="postal" />
+            </div>
+            <button id="btn2" type="button" autofocus="autofocus">
+                SEND</button>
+            </form>
+        </div>
+        <output id="out"  />
+    </div>
+</body>
+</html>
