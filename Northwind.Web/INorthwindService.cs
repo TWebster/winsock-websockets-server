@@ -143,14 +143,19 @@ namespace Northwind
 			BodyStyle = WebMessageBodyStyle.Wrapped)]
 		Supplier PostSupplier(string json);
 
+		/// <summary>
+		/// POST just doesn't seem to work. At all.
+		/// </summary>
+		/// <param name="s"></param>
+		/// <returns></returns>
+		[OperationContract]
+		[WebInvoke(Method = "POST",
+			UriTemplate = "/post",
+			RequestFormat = WebMessageFormat.Json,
+			ResponseFormat = WebMessageFormat.Json,
+			BodyStyle = WebMessageBodyStyle.Wrapped)]
+		string PostString(string s);
 
-		//[OperationContract]
-		//[WebInvoke(Method = "POST",
-		//    UriTemplate = "/execute",
-		//    RequestFormat = WebMessageFormat.Xml,
-		//    ResponseFormat = WebMessageFormat.Xml,
-		//    BodyStyle = WebMessageBodyStyle.Bare)]
-		//object[] ExecuteQuery(System.Xml.Linq.XElement xml);
 	}//end interface
 
 }
